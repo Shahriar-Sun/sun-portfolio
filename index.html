@@ -23,9 +23,16 @@
         body {
             font-family: 'Inter', sans-serif;
             padding-top: 2rem; 
-            cursor: none;
+            cursor: auto; /* Default cursor for mobile/touch screens */
         }
-        
+    
+        /* Apply custom cursor styles only on large screens (Desktop/non-touch) */
+        @media (min-width: 768px) {
+            body {
+                cursor: none; /* Hide default cursor on desktop */
+            }
+        }
+
         /* FIX: ANCHOR LINK OVERLAP ISSUE */
         main section, #hero-section {
             scroll-margin-top: 100px; 
@@ -74,7 +81,7 @@
         #desktop-menu a.nav-link-base:not(.active):hover::after {
             transform: scaleX(1);
         }
-        
+    
         /* ******************************************************
         * TEXT GLITCH EFFECT (Existing)
         *******************************************************/
@@ -99,7 +106,7 @@
 
         .glitch-text::before { text-shadow: -1px 0 var(--glitch-red); }
         .glitch-text::after { text-shadow: 1px 0 var(--glitch-cyan); }
-        
+    
         .glitch-text:hover::before,
         .glitch-text:hover::after { opacity: 1; animation: glitch-anim 0.5s infinite linear alternate; }
         .glitch-text:hover::after { animation-delay: 0.25s; }
@@ -149,7 +156,7 @@
         .social-icon-jiggle:hover {
             animation: none; 
         }
-        
+    
         /* ******************************************************
         * FLOWING SHADOW / LAVA LAMP EFFECT (Option 2) - Existing
         *******************************************************/
@@ -213,12 +220,19 @@
             opacity: 0.5;
             background-color: #EC4899; 
         }
-        
+
+        /* FIX FOR MOBILE: Hide custom cursor on screens smaller than 768px */
+        @media (max-width: 767px) {
+            #custom-cursor {
+                display: none !important;
+            }
+        }
+    
         /* PROJECT CARD 3D TILT (Existing) */
         .project-card-wrapper {
             perspective: 1000px;
         }
-        
+    
         .project-card {
             transform-style: preserve-3d;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease; 
@@ -253,7 +267,7 @@
             animation: scroll 20s linear infinite; /* Adjusted speed slightly for more tools */
             will-change: transform;
         }
-    
+
         /* DYNAMIC BLOB BACKGROUND (Parallax Retained) */
         @keyframes moveBlob {
             0%, 100% { transform: translate(0, 0) scale(1); }
@@ -284,9 +298,9 @@
             animation-duration: 20s;
             animation-delay: -5s;
         }
-    
+
         .blob-container { pointer-events: none; }
-    
+
         /* MOBILE MENU STYLES (Existing) */
         .mobile-menu-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -318,7 +332,7 @@
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
-    
+
     <!-- Custom Cursor Spotlight Element (Existing) -->
     <div id="custom-cursor"></div>
 
@@ -327,9 +341,9 @@
                 w-[95%] max-w-7xl 
                 bg-transparent backdrop-blur-sm border border-gray-700/50 shadow-xl rounded-2xl" 
          aria-label="Main Navigation">
-    
+
         <div class="px-3 py-2 md:py-3 flex items-center justify-between">
-        
+    
             <!-- Brand Logo/Name -->
             <a href="#hero-section" class="text-lg md:text-xl font-extrabold tracking-widest transition-colors hover:text-white 
                                           glitch-text text-[var(--accent-purple)]"
@@ -381,18 +395,18 @@
     </div>
 
     <main class="max-w-7xl mx-auto mt-8 md:mt-16 text-center">
-    
+
         <!-- SECTION 1: HOME/HERO -->
         <div id="hero-section" class="pt-16 pb-12 md:pt-20 md:pb-20">
             <!-- Headline: Uses existing animated-element and glitch -->
             <h2 id="main-headline" class="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-6 leading-none 
                                         mx-auto animated-element"> 
-                
+            
                 <span class="block">
-                    i enjoy crafting 
+                    I enjoy crafting 
                     <span class="glitch-text glitch-headline-text" data-text="digital">digital</span>
                 </span>
-                
+            
                 <span class="block mt-4 sm:mt-6">
                     <span class="glitch-text glitch-headline-text" data-text="products.">products.</span>
                 </span>
@@ -409,7 +423,7 @@
 
         <!-- SECTION 2: Info Block (Existing) -->
         <div id="info-block" class="flex flex-col items-center justify-center space-y-6 max-w-xs mx-auto mb-20">
-        
+    
             <!-- Profile Picture -->
             <div class="mb-0 animated-element">
                 <img 
@@ -419,7 +433,7 @@
                     class="w-24 h-24 rounded-full object-cover border-4 border-gray-800 shadow-xl transition-transform hover:scale-105"
                 >
             </div>
-        
+    
             <!-- Prominent Resume CTA Button -->
             <a href="#" class="inline-flex items-center justify-center px-4 py-2 text-sm md:px-10 md:py-3 md:text-base border border-transparent font-medium md:font-bold rounded-xl 
                                shadow-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 
@@ -435,15 +449,15 @@
                 </p>
             </section>
         </div>
-    
+
         <!-- SECTION 3: WORK (Project Grid) -->
         <section id="projects-section" aria-labelledby="projects-heading" class="w-full">
             <h3 id="projects-heading" class="text-3xl md:text-5xl font-extrabold mb-12 animated-element">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Works</span>
             </h3>
-        
+    
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            
+        
                 <!-- Project Card 1 (Existing) -->
                 <div class="project-card-wrapper animated-element">
                     <article class="project-card relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer shadow-lg bg-gradient-to-br from-purple-700 via-pink-600 to-orange-500" 
@@ -469,7 +483,7 @@
                         </div>
                     </article>
                 </div>
-            
+        
                 <!-- Project Card 3 (Existing) -->
                 <div class="project-card-wrapper animated-element">
                     <article class="project-card relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer shadow-lg bg-gradient-to-br from-pink-600 to-red-600"
@@ -500,13 +514,13 @@
             </div>
         </section>
         <!-- End Work Section -->
-    
+
         <!-- SECTION 4: SKILLS -->
         <section id="skills" class="max-w-4xl mx-auto mt-24 mb-20 md:mt-32 md:mb-32 text-left">
             <h3 class="text-3xl md:text-5xl font-extrabold mb-12 text-center animated-element">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">🛠️ Key Skills</span>
             </h3>
-        
+    
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 px-4 md:px-0 mb-10 md:mb-12">
                 <!-- Skill Items (Existing) -->
                 <div class="flex items-center space-x-4 animated-element">
@@ -542,7 +556,7 @@
                     <p class="text-xl text-gray-200 font-medium">User Flows</p>
                 </div>
             </div>
-        
+    
             <!-- SOFTWARE TOOLS MARQUEE BANNER: Now updated with new tools -->
             <div class="marquee-container w-full mt-16 md:mt-20 
                         bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl py-4 md:py-6 shadow-2xl animated-element">
@@ -550,7 +564,7 @@
                     <!-- Tool sets are injected here by JavaScript, duplicated for infinite scroll -->
                 </div>
             </div>
-        
+    
         </section>
         <!-- END: SKILLS SECTION -->
 
@@ -588,12 +602,11 @@
 
             <!-- Social Icons: Now with Dynamic Icon Jiggle (Option 3) -->
             <div class="flex justify-center space-x-12 animated-element">
-            
                 <!-- 1. LinkedIn -->
                 <a href="#" class="social-icon-jiggle text-gray-300 hover:text-[var(--accent-purple)] transition-all transform hover:scale-110 p-2 rounded-full glitch-text" aria-label="Connect on LinkedIn" data-text="&nbsp;">
                     <i class="fab fa-linkedin text-4xl leading-none w-12 h-12 flex items-center justify-center"></i>
                 </a>
-            
+        
                 <!-- 2. Email (Gmail) -->
                 <a href="mailto:shahriarabdullahsun609@gmail.com" class="social-icon-jiggle text-gray-300 hover:text-[var(--accent-purple)] transition-all transform hover:scale-110 p-2 rounded-full glitch-text" aria-label="Send an email via Gmail" data-text="&nbsp;">
                    <i class="fas fa-envelope text-4xl leading-none w-12 h-12 flex items-center justify-center"></i>
@@ -611,13 +624,13 @@
 
             </div>
  
-                
+            
              <!-- Optional direct contact link -->
             <a href="mailto:shahriarabdullahsun609@gmail.com" class="mt-8 inline-block text-xl font-bold text-[var(--accent-purple)] hover:underline transition-colors animated-element">
                 shahriarabdullahsun609@gmail.com
             </a>
         </section>
-    
+
         <!-- SECTION 7: PRIVACY POLICY (Existing) -->
         <section id="privacy-policy" class="max-w-4xl mx-auto mt-16 pt-12 text-left border-t border-gray-800">
             <h4 class="text-2xl font-extrabold mb-4 text-gray-200 animated-element">Privacy Policy</h4>
@@ -633,7 +646,7 @@
                 </p>
             </div>
         </section>
-    
+
         <!-- FOOTER -->
         <footer class="mt-8 py-8 text-sm text-gray-500 animated-element">
             <p>&copy; 2025 Shahriar Abdullah Sun. I designed and developed this website with passion and precision ✨.</p>
@@ -651,10 +664,10 @@
             const tools = [
                 // 1. Figma (Using Font Awesome and brand color)
                 { name: 'Figma', icon: '<i class="fab fa-figma text-4xl" style="color:#a259ff;"></i>' }, 
-                
+            
                 // 2. Sketch (Using Font Awesome and a suitable color)
                 { name: 'Sketch', icon: '<i class="fab fa-sketch text-4xl" style="color:#f79d3a;"></i>' }, 
-                
+            
                 // 3. Canva (Using a simple geometric SVG for 'original logo' look)
                 { 
                     name: 'Canva', 
@@ -667,13 +680,13 @@
                         </svg>
                     `
                 },
-                
+            
                 // 4. Inkscape (Vector icon for Inkscape/vector graphics)
                 { name: 'Inkscape', icon: '<i class="fas fa-bezier-curve text-4xl" style="color:#3c3d8e;"></i>' },
-                
+            
                 // 5. GIMP (Using a general creative brush icon)
                 { name: 'GIMP', icon: '<i class="fas fa-brush text-4xl" style="color:#5c5c5c;"></i>' },
-                
+            
                 // 6. Krita (Using a painting icon and orange color)
                 { name: 'Krita', icon: '<i class="fas fa-paint-brush text-4xl" style="color:#f9812a;"></i>' },
 
@@ -703,7 +716,7 @@
                 </div>
             `;
         }
-        
+    
         // Populate and start the marquee
         const marqueeContent = document.getElementById('marquee-content');
         if (marqueeContent) {
@@ -723,8 +736,11 @@
         function toggleMobileMenu() {
             const isMenuOpen = mobileMenuOverlay.classList.toggle('active');
             body.style.overflowY = isMenuOpen ? 'hidden' : 'auto';
-            if (customCursor) {
-                customCursor.style.opacity = isMenuOpen ? '0' : '0.8';
+            // Since customCursor is hidden via CSS on mobile, this opacity check is largely redundant but retained:
+            if (customCursor) { 
+                if (window.innerWidth >= 768) { // Only change opacity if we are on a desktop-sized screen
+                    customCursor.style.opacity = isMenuOpen ? '0' : '0.8';
+                }
             }
         }
 
@@ -736,15 +752,17 @@
                 setTimeout(toggleMobileMenu, 200); 
             });
         });
-        
-        
+    
+    
         // ******************************************************
         // DYNAMIC CURSOR SPOTLIGHT (Existing)
         // ******************************************************
         const interactiveElements = 'a, button, .project-card, .nav-link-base, .glitch-text, .social-icon-jiggle'; 
 
         function updateCursor(e) {
-            if (!customCursor) return;
+            // Check if screen is large enough for the custom cursor logic to run
+            if (window.innerWidth < 768 || !customCursor) return; 
+
             // 1. Position the custom cursor using translate3d for performance
             customCursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
 
@@ -759,10 +777,26 @@
             }
         }
 
-        if (customCursor) {
+        // Only attach mousemove listener if screen is large enough
+        if (customCursor && window.innerWidth >= 768) {
             document.addEventListener('mousemove', updateCursor);
+        } else if (customCursor) {
+             // Optional: Hide custom cursor on load if it's mobile, though CSS handles this now
+             customCursor.style.display = 'none';
         }
-        
+
+        // Add a resize listener to re-evaluate the cursor state if the user changes screen size
+        window.addEventListener('resize', () => {
+             if (window.innerWidth < 768) {
+                 document.removeEventListener('mousemove', updateCursor);
+             } else {
+                 if (customCursor && !document.__hasCursorListener) {
+                    document.addEventListener('mousemove', updateCursor);
+                    document.__hasCursorListener = true; // Prevents adding the listener multiple times
+                 }
+             }
+         });
+    
         // ******************************************************
         // 3D PARALLAX TILT FOR PROJECT CARDS (Existing)
         // ******************************************************
@@ -770,21 +804,27 @@
         const maxTilt = 8; 
 
         function handleTilt(e) {
+             // Disable tilt on mobile/touch screens
+            if (window.innerWidth < 768) return; 
+
             const card = e.currentTarget;
             const rect = card.getBoundingClientRect();
             const centerPointX = rect.left + rect.width / 2;
             const centerPointY = rect.top + rect.height / 2;
-            
+        
             const x = (e.clientX - centerPointX) / (rect.width / 2); 
             const y = (e.clientY - centerPointY) / (rect.height / 2); 
 
             const rotateX = -y * maxTilt; 
             const rotateY = x * maxTilt; 
-            
+        
             card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
         }
 
         function resetTilt(e) {
+            // Disable tilt reset on mobile/touch screens
+            if (window.innerWidth < 768) return; 
+            
             e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
         }
 
@@ -823,7 +863,7 @@
 
             // Split by one or more spaces and filter out empty strings
             const words = text.split(/\s+/).filter(w => w.length > 0); 
-            
+        
             let htmlContent = '';
             let delay = 0;
 
@@ -835,7 +875,7 @@
             });
 
             element.innerHTML = htmlContent;
-            
+        
             // Trigger the reveal after a short initial delay 
             setTimeout(() => {
                 document.querySelectorAll(`${selector} .reveal-word`).forEach(span => {
@@ -861,20 +901,20 @@
                         const target = entry.target;
                         // Find the closest parent section/block that is also animated
                         const parent = target.closest('section, #hero-section, #info-block'); 
-                        
+                    
                         // Apply staggered delay based on index within the parent container
                         if (parent) {
                             let delay = 0;
                             // Find all animated elements within the parent (excluding the bio text)
                             const children = Array.from(parent.querySelectorAll('.animated-element:not(#bio-section p)'));
                             const index = children.indexOf(target);
-                            
+                        
                             if (index !== -1) {
                                 delay = index * 100; 
                             }
                             target.style.transitionDelay = `${delay}ms`;
                         }
-                        
+                    
                         target.classList.add('is-visible');
                         observer.unobserve(target);
                     }
@@ -893,7 +933,7 @@
                 'about-me', 
                 'contact'
             ];
-            
+        
             const navLinks = document.querySelectorAll('#desktop-menu a.nav-link-base');
 
             const observerOptions = {
@@ -928,7 +968,7 @@
                     observer.observe(section);
                 }
             });
-            
+        
             // Handle the case where the user is at the very top of the page
             if (window.scrollY === 0) {
                 navLinks.forEach(link => link.classList.remove('active'));
@@ -936,19 +976,19 @@
                 if (homeLink) homeLink.classList.add('active');
             }
         }
-        
+    
         // --- Initialization on Load ---
         document.addEventListener('DOMContentLoaded', () => {
             const navbar = document.getElementById('main-navbar');
             setTimeout(() => {
                 navbar.classList.add('navbar-loaded');
             }, 100); 
-            
+        
             // Initialize the three animation systems
             setupStaggeredReveal('#bio-text'); // NEW: Option 1
             setupScrollReveal(); 
             setupIntersectionObserver();
-            
+        
             handleScrollParallax(); 
         });
     </script>
