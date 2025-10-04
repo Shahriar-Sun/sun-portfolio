@@ -40,7 +40,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between; 
-            padding-top: 6rem; /* Add padding to account for fixed navbar */
+            /* MODIFIED: Reduced padding-top from 6rem to 4rem for less gap on mobile */
+            padding-top: 4rem; 
             padding-bottom: 2rem; 
             box-sizing: border-box;
         }
@@ -384,7 +385,7 @@
             
             <div class="flex flex-col items-center justify-center space-y-8 md:space-y-10 w-full">
                 <!-- Hero Text -->
-                <div id="hero-section" class="pt-10 md:pt-0">
+                <div id="hero-section" class="pt-10 md:pt-16">
                     <h2 id="main-headline" class="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-6 leading-none 
                                                 mx-auto animated-element"> 
                     
@@ -398,8 +399,8 @@
                         </span>
                     </h2>
         
-                    <!-- Bio Subtitle: Now visible on mobile and desktop -->
-                    <section id="bio-section" class="block max-w-5xl mb-8 md:mb-16 mx-auto animated-element" aria-label="Professional Biography">
+                    <!-- Bio Subtitle: Now hidden on mobile (default) and shown on small screens (sm:block) -->
+                    <section id="bio-section" class="hidden sm:block max-w-5xl mb-8 md:mb-16 mx-auto animated-element" aria-label="Professional Biography">
                         <p id="bio-text" class="text-lg text-gray-400 leading-relaxed font-medium">
                             Designing paths where users feel at home in every click
                         </p>
@@ -796,7 +797,8 @@
         // ******************************************************
         function setupStaggeredReveal(selector, delayIncrement = 50) {
             const element = document.querySelector(selector);
-            if (!element) return;
+            // Check if the element is visible (it's hidden on small screens now)
+            if (!element || window.innerWidth < 640) return; 
             
             // Get the full text and hide the original
             const text = element.textContent.trim();
