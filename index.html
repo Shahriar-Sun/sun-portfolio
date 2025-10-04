@@ -397,7 +397,8 @@
     <main class="max-w-7xl mx-auto mt-8 md:mt-16 text-center">
 
         <!-- SECTION 1: HOME/HERO -->
-        <div id="hero-section" class="pt-16 pb-12 md:pt-20 md:pb-20">
+        <!-- Adjusted pt-16 to pt-12 and pb-12 to pb-6 for mobile gap reduction -->
+        <div id="hero-section" class="pt-12 pb-6 md:pt-20 md:pb-20">
             <!-- Headline: Uses existing animated-element and glitch -->
             <h2 id="main-headline" class="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-6 leading-none 
                                         mx-auto animated-element"> 
@@ -407,13 +408,15 @@
                     <span class="glitch-text glitch-headline-text" data-text="digital">digital</span>
                 </span>
             
-                <span class="block mt-4 sm:mt-6">
+                <!-- FIX: Reduced vertical gap on mobile from mt-4 to mt-2 -->
+                <span class="block mt-2 sm:mt-6">
                     <span class="glitch-text glitch-headline-text" data-text="products.">products.</span>
                 </span>
             </h2>
 
-            <!-- Bio Section: Targeted for the NEW Staggered Word Reveal -->
-            <section id="bio-section" class="max-w-5xl mb-12 md:mb-16 mx-auto animated-element" aria-label="Professional Biography">
+            <!-- Bio Section: Targeted for removal on mobile (hidden below 'sm' breakpoint) -->
+            <!-- FIX: Added hidden sm:block utility class -->
+            <section id="bio-section" class="hidden sm:block max-w-5xl mb-12 md:mb-16 mx-auto animated-element" aria-label="Professional Biography">
                 <p id="bio-text" class="text-lg text-gray-400 leading-relaxed font-medium">
                     Designing paths where users feel at home in every click
                 </p>
@@ -422,7 +425,8 @@
         </div>
 
         <!-- SECTION 2: Info Block (Existing) -->
-        <div id="info-block" class="flex flex-col items-center justify-center space-y-6 max-w-xs mx-auto mb-20">
+        <!-- Reduced mb-20 to mb-12 for mobile gap reduction -->
+        <div id="info-block" class="flex flex-col items-center justify-center space-y-6 max-w-xs mx-auto mb-12 md:mb-20">
     
             <!-- Profile Picture -->
             <div class="mb-0 animated-element">
@@ -856,6 +860,8 @@
         function setupStaggeredReveal(selector, delayIncrement = 50) {
             const element = document.querySelector(selector);
             if (!element) return;
+            
+            // NOTE: Since the bio-section is hidden on mobile, this animation will only run on desktop.
 
             // Get the full text and hide the original
             const text = element.textContent.trim();
