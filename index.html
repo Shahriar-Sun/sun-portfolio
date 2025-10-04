@@ -23,20 +23,34 @@
         body {
             font-family: 'Inter', sans-serif;
             padding-top: 2rem; 
-            cursor: auto; /* Default cursor for mobile/touch screens */
+            /* REMOVED: cursor: none; on large screens, now using default stock pointer */
         }
     
-        /* Apply custom cursor styles only on large screens (Desktop/non-touch) */
-        @media (min-width: 768px) {
-            body {
-                cursor: none; /* Hide default cursor on desktop */
-            }
-        }
-
         /* FIX: ANCHOR LINK OVERLAP ISSUE */
         main section, #hero-section {
             scroll-margin-top: 100px; 
         }
+
+        /* ******************************************************
+        * MOBILE VISIBILITY ADJUSTMENTS 
+        *******************************************************/
+        /* Ensure the first page content pushes the Work section below the fold on mobile. */
+        #mobile-first-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            padding-top: 6rem; /* Add padding to account for fixed navbar */
+            padding-bottom: 2rem; 
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 767px) {
+            #projects-heading {
+                margin-top: 0 !important; 
+            }
+        }
+
 
         /* ******************************************************
         * NAVIGATION LINK EFFECTS (Glow + Center-Out Line)
@@ -53,7 +67,7 @@
 
         #desktop-menu a.nav-link-base:hover {
             color: white; 
-            /* Text Glow (Existing from last turn) */
+            /* Text Glow */
             text-shadow: 0 0 5px var(--accent-purple), 0 0 15px rgba(139, 92, 246, 0.4); 
         }
 
@@ -63,7 +77,7 @@
             text-shadow: 0 0 5px var(--accent-purple), 0 0 15px rgba(139, 92, 246, 0.4); 
         }
 
-        /* Center-Out Underline (Existing) */
+        /* Center-Out Underline */
         #desktop-menu a.nav-link-base::after {
             content: '';
             position: absolute;
@@ -83,7 +97,7 @@
         }
     
         /* ******************************************************
-        * TEXT GLITCH EFFECT (Existing)
+        * TEXT GLITCH EFFECT
         *******************************************************/
         .glitch-text {
             position: relative;
@@ -128,7 +142,7 @@
         }
 
         /* ******************************************************
-        * STAGGERED WORD REVEAL (Option 1) - Existing
+        * STAGGERED WORD REVEAL 
         *******************************************************/
         .reveal-word {
             opacity: 0;
@@ -139,7 +153,7 @@
         }
 
         /* ******************************************************
-        * DYNAMIC ICON JIGGLE (Option 3) - Existing
+        * DYNAMIC ICON JIGGLE
         *******************************************************/
         @keyframes subtleJiggle {
             0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
@@ -158,7 +172,7 @@
         }
     
         /* ******************************************************
-        * FLOWING SHADOW / LAVA LAMP EFFECT (Option 2) - Existing
+        * FLOWING SHADOW / LAVA LAMP EFFECT
         *******************************************************/
         @keyframes flowingShadow {
             0%, 100% { 
@@ -181,7 +195,7 @@
 
 
         /* ******************************************************
-        * SCROLL REVEAL ANIMATIONS (Existing)
+        * SCROLL REVEAL ANIMATIONS
         *******************************************************/
         .animated-element {
             opacity: 0;
@@ -196,39 +210,9 @@
             transform: translateY(0);
         }
 
-        /* DYNAMIC CURSOR SPOTLIGHT (Existing) */
-        #custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 15px; 
-            height: 15px;
-            background-color: var(--accent-purple);
-            border-radius: 50%;
-            pointer-events: none; 
-            z-index: 9999;
-            mix-blend-mode: hard-light; 
-            opacity: 0.8;
-            transform: translate3d(-50%, -50%, 0); 
-            transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease;
-            filter: blur(5px);
-        }
-
-        #custom-cursor.expanded {
-            width: 50px;
-            height: 50px;
-            opacity: 0.5;
-            background-color: #EC4899; 
-        }
-
-        /* FIX FOR MOBILE: Hide custom cursor on screens smaller than 768px */
-        @media (max-width: 767px) {
-            #custom-cursor {
-                display: none !important;
-            }
-        }
+        /* REMOVED: DYNAMIC CURSOR SPOTLIGHT CSS */
     
-        /* PROJECT CARD 3D TILT (Existing) */
+        /* PROJECT CARD 3D TILT */
         .project-card-wrapper {
             perspective: 1000px;
         }
@@ -237,7 +221,7 @@
             transform-style: preserve-3d;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease; 
             transform: none; 
-            cursor: none; 
+            cursor: pointer; /* Ensure pointer is active for hover/click interaction */
             will-change: transform, box-shadow;
         }
 
@@ -255,7 +239,7 @@
             opacity: 1;
         }
 
-        /* MARQUEE SCROLL (Existing) */
+        /* MARQUEE SCROLL */
         @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); } 
@@ -264,11 +248,11 @@
         .marquee-content {
             display: flex;
             width: 200%; 
-            animation: scroll 20s linear infinite; /* Adjusted speed slightly for more tools */
+            animation: scroll 20s linear infinite; 
             will-change: transform;
         }
 
-        /* DYNAMIC BLOB BACKGROUND (Parallax Retained) */
+        /* DYNAMIC BLOB BACKGROUND */
         @keyframes moveBlob {
             0%, 100% { transform: translate(0, 0) scale(1); }
             25% { transform: translate(40px, -60px) scale(1.1); }
@@ -301,7 +285,7 @@
 
         .blob-container { pointer-events: none; }
 
-        /* MOBILE MENU STYLES (Existing) */
+        /* MOBILE MENU STYLES */
         .mobile-menu-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px);
@@ -327,14 +311,13 @@
 </head>
 <body class="bg-[var(--dark-bg)] text-[var(--primary-text)] min-h-screen p-4 md:p-8">
 
-    <!-- Fixed Background for Parallax (Existing) -->
+    <!-- Fixed Background for Parallax -->
     <div id="blob-container" class="blob-container fixed inset-0 z-[-1] animated-element is-visible">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
 
-    <!-- Custom Cursor Spotlight Element (Existing) -->
-    <div id="custom-cursor"></div>
+    <!-- REMOVED: Custom Cursor Spotlight Element -->
 
     <!-- Fixed Navigation Bar Container -->
     <nav id="main-navbar" class="fixed top-4 sm:top-8 left-1/2 -translate-x-1/2 z-50 
@@ -365,7 +348,7 @@
                    aria-label="Go to Contact page" data-section="contact">Contact</a>
             </div>
 
-            <!-- Mobile Menu Toggle Button (Existing) -->
+            <!-- Mobile Menu Toggle Button -->
             <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-300 hover:text-[var(--accent-purple)]" aria-label="Open menu">
                 <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -380,7 +363,7 @@
         </div>
     </nav>
 
-    <!-- MOBILE MENU OVERLAY (Existing) -->
+    <!-- MOBILE MENU OVERLAY -->
     <div id="mobile-menu-overlay" class="mobile-menu-overlay md:hidden">
         <div class="flex flex-col space-y-8 text-2xl font-bold text-center">
             <a href="#hero-section" class="mobile-nav-link text-white hover:text-[var(--accent-purple)] transition-colors">Home</a>
@@ -394,75 +377,74 @@
         </button>
     </div>
 
-    <main class="max-w-7xl mx-auto mt-8 md:mt-16 text-center">
+    <main class="max-w-7xl mx-auto text-center">
 
-        <!-- SECTION 1: HOME/HERO -->
-        <!-- Adjusted pt-16 to pt-12 and pb-12 to pb-6 for mobile gap reduction -->
-        <div id="hero-section" class="pt-12 pb-6 md:pt-20 md:pb-20">
-            <!-- Headline: Uses existing animated-element and glitch -->
-            <h2 id="main-headline" class="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-6 leading-none 
-                                        mx-auto animated-element"> 
+        <!-- SECTION 1: HOME/HERO (WRAPPED IN MOBILE-FIRST PAGE CONTAINER) -->
+        <div id="mobile-first-page" class="md:pt-16 md:pb-20"> 
             
-                <span class="block">
-                    I enjoy crafting 
-                    <span class="glitch-text glitch-headline-text" data-text="digital">digital</span>
-                </span>
-            
-                <!-- FIX: Reduced vertical gap on mobile from mt-4 to mt-2 -->
-                <span class="block mt-2 sm:mt-6">
-                    <span class="glitch-text glitch-headline-text" data-text="products.">products.</span>
-                </span>
-            </h2>
-
-            <!-- Bio Section: Targeted for removal on mobile (hidden below 'sm' breakpoint) -->
-            <!-- FIX: Added hidden sm:block utility class -->
-            <section id="bio-section" class="hidden sm:block max-w-5xl mb-12 md:mb-16 mx-auto animated-element" aria-label="Professional Biography">
-                <p id="bio-text" class="text-lg text-gray-400 leading-relaxed font-medium">
-                    Designing paths where users feel at home in every click
-                </p>
-            </section>
-            <!-- Note: The content of the P tag is static here, but JS will split and wrap it for animation -->
-        </div>
-
-        <!-- SECTION 2: Info Block (Existing) -->
-        <!-- Reduced mb-20 to mb-12 for mobile gap reduction -->
-        <div id="info-block" class="flex flex-col items-center justify-center space-y-6 max-w-xs mx-auto mb-12 md:mb-20">
-    
-            <!-- Profile Picture -->
-            <div class="mb-0 animated-element">
-                <img 
-                    src="https://i.postimg.cc/xCQLzc1M/Gemini-Generated-Image-ciehticiehticieh.png" 
-                    onerror="this.onerror=null;this.src='https://placehold.co/100x100/1F2937/FFFFFF?text=Photo';"
-                    alt="Profile Picture of Sun" 
-                    class="w-24 h-24 rounded-full object-cover border-4 border-gray-800 shadow-xl transition-transform hover:scale-105"
-                >
+            <div class="flex flex-col items-center justify-center space-y-8 md:space-y-10 w-full">
+                <!-- Hero Text -->
+                <div id="hero-section" class="pt-10 md:pt-0">
+                    <h2 id="main-headline" class="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-6 leading-none 
+                                                mx-auto animated-element"> 
+                    
+                        <span class="block">
+                            I enjoy crafting 
+                            <span class="glitch-text glitch-headline-text" data-text="digital">digital</span>
+                        </span>
+                    
+                        <span class="block mt-2 sm:mt-6">
+                            <span class="glitch-text glitch-headline-text" data-text="products.">products.</span>
+                        </span>
+                    </h2>
+        
+                    <!-- Bio Subtitle: Now visible on mobile and desktop -->
+                    <section id="bio-section" class="block max-w-5xl mb-8 md:mb-16 mx-auto animated-element" aria-label="Professional Biography">
+                        <p id="bio-text" class="text-lg text-gray-400 leading-relaxed font-medium">
+                            Designing paths where users feel at home in every click
+                        </p>
+                    </section>
+                </div>
+        
+                <!-- Profile Picture -->
+                <div class="mb-0 animated-element">
+                    <img 
+                        src="https://i.postimg.cc/xCQLzc1M/Gemini-Generated-Image-ciehticiehticieh.png" 
+                        onerror="this.onerror=null;this.src='https://placehold.co/100x100/1F2937/FFFFFF?text=Photo';"
+                        alt="Profile Picture of Sun" 
+                        class="w-24 h-24 rounded-full object-cover border-4 border-gray-800 shadow-xl transition-transform hover:scale-105"
+                    >
+                </div>
+        
+                <!-- Prominent Resume CTA Button -->
+                <a href="#" class="inline-flex items-center justify-center px-4 py-2 text-sm md:px-10 md:py-3 md:text-base border border-transparent font-medium md:font-bold rounded-xl 
+                                   shadow-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 
+                                   hover:from-purple-700 hover:to-indigo-700 transition duration-300 transform hover:scale-[1.05] animated-element"
+                   role="button" aria-label="View Resume">
+                    Resume
+                </a>
+        
+                <!-- Current Focus Section -->
+                <section aria-labelledby="current-status-heading" class="block w-full max-w-sm mx-auto animated-element mb-10">
+                    <p class="text-lg font-semibold text-white leading-snug">
+                        <span class="text-[var(--accent-purple)]">UI/UX Designer</span> &bull; Graduating in BBA at NSU &bull; Exploring AI expertise &bull; Fluent in English, Hindi, Bangla & learning Spanish &bull;
+                    </p>
+                </section>
             </div>
-    
-            <!-- Prominent Resume CTA Button -->
-            <a href="#" class="inline-flex items-center justify-center px-4 py-2 text-sm md:px-10 md:py-3 md:text-base border border-transparent font-medium md:font-bold rounded-xl 
-                               shadow-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 
-                               hover:from-purple-700 hover:to-indigo-700 transition duration-300 transform hover:scale-[1.05] animated-element"
-               role="button" aria-label="View Resume">
-                Resume
-            </a>
-
-            <!-- Current Focus Section -->
-            <section aria-labelledby="current-status-heading" class="w-full animated-element">
-                <p class="text-lg font-semibold text-white leading-snug">
-                    <span class="text-[var(--accent-purple)]">UI/UX Designer</span> &bull; Graduating in BBA at NSU &bull; Exploring AI expertise &bull; Fluent in English, Hindi, Bangla & learning Spanish &bull;
-                </p>
-            </section>
+            
         </div>
+        <!-- END: MOBILE FIRST PAGE CONTAINER -->
 
-        <!-- SECTION 3: WORK (Project Grid) -->
-        <section id="projects-section" aria-labelledby="projects-heading" class="w-full">
+
+        <!-- SECTION 3: WORK (Project Grid) - This is the start of the 2nd 'page' -->
+        <section id="projects-section" aria-labelledby="projects-heading" class="w-full pt-16 md:pt-0">
             <h3 id="projects-heading" class="text-3xl md:text-5xl font-extrabold mb-12 animated-element">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Works</span>
             </h3>
     
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         
-                <!-- Project Card 1 (Existing) -->
+                <!-- Project Card 1 -->
                 <div class="project-card-wrapper animated-element">
                     <article class="project-card relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer shadow-lg bg-gradient-to-br from-purple-700 via-pink-600 to-orange-500" 
                             role="region" aria-label="Project: My Touches - UX Design">
@@ -475,7 +457,7 @@
                     </article>
                 </div>
 
-                <!-- Project Card 2 (Existing) -->
+                <!-- Project Card 2 -->
                 <div class="project-card-wrapper animated-element">
                     <article class="project-card relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer shadow-lg bg-gradient-to-br from-yellow-400 to-green-500"
                             role="region" aria-label="Project: Real-time Chat Microservice">
@@ -488,7 +470,7 @@
                     </article>
                 </div>
         
-                <!-- Project Card 3 (Existing) -->
+                <!-- Project Card 3 -->
                 <div class="project-card-wrapper animated-element">
                     <article class="project-card relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer shadow-lg bg-gradient-to-br from-pink-600 to-red-600"
                             role="region" aria-label="Project: E-commerce Checkout Flow">
@@ -502,7 +484,7 @@
                 </div>
 
 
-                <!-- Project Card 4 (Existing) -->
+                <!-- Project Card 4 -->
                 <div class="project-card-wrapper animated-element">
                     <article class="project-card relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer shadow-lg bg-gradient-to-br from-blue-500 to-indigo-800"
                             role="region" aria-label="Project: Accessibility Audit">
@@ -526,7 +508,7 @@
             </h3>
     
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 px-4 md:px-0 mb-10 md:mb-12">
-                <!-- Skill Items (Existing) -->
+                <!-- Skill Items -->
                 <div class="flex items-center space-x-4 animated-element">
                     <span class="text-[var(--accent-purple)] text-2xl flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
                     <p class="text-xl text-gray-200 font-medium">Visual Design & Branding</p>
@@ -561,7 +543,7 @@
                 </div>
             </div>
     
-            <!-- SOFTWARE TOOLS MARQUEE BANNER: Now updated with new tools -->
+            <!-- SOFTWARE TOOLS MARQUEE BANNER -->
             <div class="marquee-container w-full mt-16 md:mt-20 
                         bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl py-4 md:py-6 shadow-2xl animated-element">
                 <div id="marquee-content" class="marquee-content">
@@ -572,7 +554,7 @@
         </section>
         <!-- END: SKILLS SECTION -->
 
-        <!-- SECTION 5: ABOUT ME (Existing) -->
+        <!-- SECTION 5: ABOUT ME -->
         <section id="about-me" class="max-w-4xl mx-auto mt-24 mb-20 md:mt-32 md:mb-32">
             <h3 class="text-3xl md:text-5xl font-extrabold mb-8 animated-element">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">☀️ About Me</span>
@@ -604,7 +586,7 @@
                 Got a project in mind? Let’s make it happen together!
             </p>
 
-            <!-- Social Icons: Now with Dynamic Icon Jiggle (Option 3) -->
+            <!-- Social Icons: Now with Dynamic Icon Jiggle -->
             <div class="flex justify-center space-x-12 animated-element">
                 <!-- 1. LinkedIn -->
                 <a href="#" class="social-icon-jiggle text-gray-300 hover:text-[var(--accent-purple)] transition-all transform hover:scale-110 p-2 rounded-full glitch-text" aria-label="Connect on LinkedIn" data-text="&nbsp;">
@@ -635,7 +617,7 @@
             </a>
         </section>
 
-        <!-- SECTION 7: PRIVACY POLICY (Existing) -->
+        <!-- SECTION 7: PRIVACY POLICY -->
         <section id="privacy-policy" class="max-w-4xl mx-auto mt-16 pt-12 text-left border-t border-gray-800">
             <h4 class="text-2xl font-extrabold mb-4 text-gray-200 animated-element">Privacy Policy</h4>
             <div class="text-sm text-gray-500 space-y-3">
@@ -729,23 +711,16 @@
             marqueeContent.innerHTML = toolSetHtml + toolSetHtml;
         }
 
-        // --- Mobile Menu Toggle Logic (Existing) ---
+        // --- Mobile Menu Toggle Logic ---
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
         const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
         const mobileCloseButton = document.getElementById('mobile-close-button');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        const customCursor = document.getElementById('custom-cursor');
         const body = document.body;
 
         function toggleMobileMenu() {
             const isMenuOpen = mobileMenuOverlay.classList.toggle('active');
             body.style.overflowY = isMenuOpen ? 'hidden' : 'auto';
-            // Since customCursor is hidden via CSS on mobile, this opacity check is largely redundant but retained:
-            if (customCursor) { 
-                if (window.innerWidth >= 768) { // Only change opacity if we are on a desktop-sized screen
-                    customCursor.style.opacity = isMenuOpen ? '0' : '0.8';
-                }
-            }
         }
 
         mobileMenuToggle.addEventListener('click', toggleMobileMenu);
@@ -759,50 +734,12 @@
     
     
         // ******************************************************
-        // DYNAMIC CURSOR SPOTLIGHT (Existing)
+        // REMOVED: DYNAMIC CURSOR SPOTLIGHT JAVASCRIPT
         // ******************************************************
-        const interactiveElements = 'a, button, .project-card, .nav-link-base, .glitch-text, .social-icon-jiggle'; 
 
-        function updateCursor(e) {
-            // Check if screen is large enough for the custom cursor logic to run
-            if (window.innerWidth < 768 || !customCursor) return; 
 
-            // 1. Position the custom cursor using translate3d for performance
-            customCursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
-
-            // 2. Check for interactive elements
-            const target = e.target;
-            const isInteractive = target.matches(interactiveElements) || target.closest(interactiveElements);
-
-            if (isInteractive && !customCursor.classList.contains('expanded')) {
-                customCursor.classList.add('expanded');
-            } else if (!isInteractive && customCursor.classList.contains('expanded')) {
-                customCursor.classList.remove('expanded');
-            }
-        }
-
-        // Only attach mousemove listener if screen is large enough
-        if (customCursor && window.innerWidth >= 768) {
-            document.addEventListener('mousemove', updateCursor);
-        } else if (customCursor) {
-             // Optional: Hide custom cursor on load if it's mobile, though CSS handles this now
-             customCursor.style.display = 'none';
-        }
-
-        // Add a resize listener to re-evaluate the cursor state if the user changes screen size
-        window.addEventListener('resize', () => {
-             if (window.innerWidth < 768) {
-                 document.removeEventListener('mousemove', updateCursor);
-             } else {
-                 if (customCursor && !document.__hasCursorListener) {
-                    document.addEventListener('mousemove', updateCursor);
-                    document.__hasCursorListener = true; // Prevents adding the listener multiple times
-                 }
-             }
-         });
-    
         // ******************************************************
-        // 3D PARALLAX TILT FOR PROJECT CARDS (Existing)
+        // 3D PARALLAX TILT FOR PROJECT CARDS 
         // ******************************************************
         const projectCards = document.querySelectorAll('.project-card');
         const maxTilt = 8; 
@@ -838,7 +775,7 @@
         });
 
         // ******************************************************
-        // PARALLAX SCROLL FOR BACKGROUND BLOBS (Existing)
+        // PARALLAX SCROLL FOR BACKGROUND BLOBS 
         // ******************************************************
         const blobContainer = document.getElementById('blob-container');
         const parallaxFactor = 0.1; 
@@ -855,14 +792,12 @@
 
 
         // ******************************************************
-        // NEW: STAGGERED WORD REVEAL FOR BIO TEXT (Option 1)
+        // STAGGERED WORD REVEAL FOR BIO TEXT 
         // ******************************************************
         function setupStaggeredReveal(selector, delayIncrement = 50) {
             const element = document.querySelector(selector);
             if (!element) return;
             
-            // NOTE: Since the bio-section is hidden on mobile, this animation will only run on desktop.
-
             // Get the full text and hide the original
             const text = element.textContent.trim();
             element.textContent = ''; // Clear original text
@@ -875,7 +810,6 @@
 
             words.forEach(word => {
                 // Wrap each word (plus a non-breaking space) in a span
-                // Non-breaking space keeps words together and allows the animation to work cleanly
                 htmlContent += `<span class="reveal-word" style="transition-delay: ${delay}ms;">${word}&nbsp;</span>`;
                 delay += delayIncrement;
             });
@@ -888,10 +822,10 @@
                     span.style.opacity = '1';
                     span.style.transform = 'translateY(0)';
                 });
-            }, 800); // Increased delay slightly to allow the main headline to finish its initial fade-up
+            }, 800); 
         }
 
-        // --- Intersection Observer for Scroll Reveal (Existing) ---
+        // --- Intersection Observer for Scroll Reveal ---
         function setupScrollReveal() {
             // Exclude the main bio text from the standard scroll reveal since it has its own staggered effect
             const elements = document.querySelectorAll('.animated-element:not(#bio-section p)');
@@ -906,7 +840,7 @@
                     if (entry.isIntersecting) {
                         const target = entry.target;
                         // Find the closest parent section/block that is also animated
-                        const parent = target.closest('section, #hero-section, #info-block'); 
+                        const parent = target.closest('section, #hero-section, #info-block, #mobile-first-page'); 
                     
                         // Apply staggered delay based on index within the parent container
                         if (parent) {
@@ -930,7 +864,7 @@
             elements.forEach(el => observer.observe(el));
         }
 
-        // --- Intersection Observer for Active Nav Links (Existing) ---
+        // --- Intersection Observer for Active Nav Links ---
         function setupIntersectionObserver() {
             const sections = [
                 'hero-section', 
@@ -991,7 +925,7 @@
             }, 100); 
         
             // Initialize the three animation systems
-            setupStaggeredReveal('#bio-text'); // NEW: Option 1
+            setupStaggeredReveal('#bio-text'); 
             setupScrollReveal(); 
             setupIntersectionObserver();
         
